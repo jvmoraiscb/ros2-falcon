@@ -118,9 +118,9 @@ void IK(Angle& angles, const gmtl::Vec3d& worldPosition) {
     double l13 = -4 * libnifalcon::a * P3[2];
     double l23 = P3[2] * P3[2] + P3[0] * P3[0] + 2 * libnifalcon::c * P3[0] + 2 * libnifalcon::a * P3[0] + libnifalcon::a * libnifalcon::a + libnifalcon::c * libnifalcon::c - libnifalcon::d * libnifalcon::d - libnifalcon::e * libnifalcon::e - libnifalcon::b * libnifalcon::b * sin(angles.theta3[2]) * sin(angles.theta3[2]) - 2 * libnifalcon::b * libnifalcon::e * sin(angles.theta3[2]) - 2 * libnifalcon::b * libnifalcon::d * sin(angles.theta3[2]) - 2 * libnifalcon::d * libnifalcon::e + 2 * libnifalcon::a * libnifalcon::c;
 
-    double T1a = (-l11 + sqrt(l11 * l11 - 4 * l01 * l21)) / (2 * l21);
-    double T2a = (-l12 + sqrt(l12 * l12 - 4 * l02 * l22)) / (2 * l22);
-    double T3a = (-l13 + sqrt(l13 * l13 - 4 * l03 * l23)) / (2 * l23);
+    // double T1a = (-l11 + sqrt(l11 * l11 - 4 * l01 * l21)) / (2 * l21);
+    // double T2a = (-l12 + sqrt(l12 * l12 - 4 * l02 * l22)) / (2 * l22);
+    // double T3a = (-l13 + sqrt(l13 * l13 - 4 * l03 * l23)) / (2 * l23);
 
     double T1b = (-l11 - sqrt(l11 * l11 - 4 * l01 * l21)) / (2 * l21);
     double T2b = (-l12 - sqrt(l12 * l12 - 4 * l02 * l22)) / (2 * l22);
@@ -152,7 +152,7 @@ void FK(const gmtl::Vec3d& theta0, gmtl::Vec3d& pos) {
     double gradientAdjustment = 0.5;
     int maxTries = 15;
 
-    bool done = 0;
+    //bool done = 0;
     for (int i = 0; i < maxTries; i++) {
         // All we have initially are the three values for Theta0 and a guess of position
 
@@ -241,11 +241,11 @@ Falcon::Falcon() {
     firmware_loaded = this->falconDevice.isFirmwareLoaded();
     if (!firmware_loaded) {
         printf("Loading firmware\n");
-        uint8_t* firmware_block;
-        long firmware_size;
+        //uint8_t* firmware_block;
+        //long firmware_size;
         {
-            firmware_block = const_cast<uint8_t*>(NOVINT_FALCON_NVENT_FIRMWARE);
-            firmware_size = NOVINT_FALCON_NVENT_FIRMWARE_SIZE;
+            //firmware_block = const_cast<uint8_t*>(NOVINT_FALCON_NVENT_FIRMWARE);
+            //firmware_size = NOVINT_FALCON_NVENT_FIRMWARE_SIZE;
 
             for (int i = 0; i < 10; ++i) {
                 if (!this->falconDevice.getFalconFirmware()->loadFirmware(skip_checksum, NOVINT_FALCON_NVENT_FIRMWARE_SIZE, const_cast<uint8_t*>(NOVINT_FALCON_NVENT_FIRMWARE)))
